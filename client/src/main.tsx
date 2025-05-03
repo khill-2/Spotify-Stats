@@ -2,20 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'; // Your global styles
-import App from './App';
-import Profile from './pages/Profile'; // Make sure Profile component is imported
+import App from './App'; // Home page (login page)
+import Profile from './pages/Profile'; // Profile page
+import Login from './pages/Login'; // Login page
+import Callback from './pages/Callback'; // Callback page after login
 
 // Main entry point where routing is set up
 const Main = () => {
   return (
     <Router>
       <Routes>
-        {/* Home Route */}
-        <Route path="/" element={<App />} />
+        {/* Home Route (could be your landing page, or directly show login if you want) */}
+        <Route path="/" element={<App />} /> 
+
+        {/* Login Route (login button page) */}
+        <Route path="/login" element={<Login />} /> 
 
         {/* Profile Route */}
-        <Route path="\" element={<h1>Welcome to WrappedNow</h1>}/>
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile />} /> 
+
+        {/* Callback Route (Spotify redirects here after login) */}
+        <Route path="/callback" element={<Callback />} />
       </Routes>
     </Router>
   );

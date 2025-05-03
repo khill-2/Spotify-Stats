@@ -1,35 +1,36 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Callback = () => {
   const navigate = useNavigate();
-  const alreadyFetched = useRef(false); // 🛡 prevents multiple POSTs
 
   useEffect(() => {
-    if (alreadyFetched.current) return;
-
+    // Get the authorization code from the URL query parameters
     const query = new URLSearchParams(window.location.search);
     const code = query.get('code');
+    console.log('Received code:', code); // Log the received code for debugging
 
     if (code) {
-      alreadyFetched.current = true;
-
       fetch('http://localhost:3001/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ code }), // Send the code to the backend
       })
-        .then(res => {
-          if (!res.ok) throw new Error('Token exchange failed');
-          return res.json();
-        })
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('Received token data:', data); // Log the token data for debugging
+          
+          // Store the access token in localStorage
           localStorage.setItem('spotify_token', data.access_token);
-          navigate('/');
+          
+          // Redirect to the profile page after successful login
+          navigate('/profile'); // This redirects to the profile page
         })
-        .catch(err => {
-          console.error('❌ Frontend fetch failed:', err);
+        .catch((err) => {
+          console.error('❌ Token exchange failed:', err);
         });
+    } else {
+      console.error('No code found in the URL');
     }
   }, [navigate]);
 
