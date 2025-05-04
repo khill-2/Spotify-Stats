@@ -1,57 +1,54 @@
-const axios = require('axios');
 const express = require('express');
-const app = express();
+const axios = require('axios');
 const cors = require('cors');
 require('dotenv').config();
 
-app.use(cors());
+const app = express();
 app.use(express.json());
 
-// Spotify's token exchange endpoint
-// Example of updated error handling in the token exchange endpoint
+const corsOptions = {
+  origin: 'http://127.0.0.1:3000', // must match your frontend exactly
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
+const PORT = 3001;
+
 app.post('/auth/token', async (req, res) => {
-    const code = req.body.code;
-    const redirectUri = 'http://127.0.0.1:3000/callback'; // Match with the registered URI
-  
-    // Spotify token request parameters
+  const code = req.body.code;
+  if (!code) {
+    return res.status(400).send('Missing code');
+  }
+
+  try {
     const params = new URLSearchParams();
     params.append('grant_type', 'authorization_code');
     params.append('code', code);
-    params.append('redirect_uri', redirectUri);
-  
+    params.append('redirect_uri', 'http://127.0.0.1:3000/callback'); // must match Spotify dashboard & Login.tsx
+
     const authHeader = Buffer.from(
       `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
     ).toString('base64');
-  
-    try {
-      const response = await axios.post('https://accounts.spotify.com/api/token', params, {
+
+    const response = await axios.post(
+      'https://accounts.spotify.com/api/token',
+      params,
+      {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Basic ${authHeader}`,
+          Authorization: `Basic ${authHeader}`,
         },
-      });
-  
-      res.json(response.data); // Send the token data back
-    } catch (err) {
-      console.error('Token exchange error:', err.response ? err.response.data : err.message);
-      
-      // Return a more detailed error message
-      if (err.response) {
-        return res.status(400).json({
-          error: err.response.data.error,
-          description: err.response.data.error_description || 'Unknown error',
-        });
-      } else {
-        return res.status(500).json({
-          error: 'Internal Server Error',
-          description: err.message || 'Failed to exchange token',
-        });
       }
-    }
-  });
+    );
 
-// Start the server
-const PORT = process.env.PORT || 3001;
+    console.log('✅ Token exchange success');
+    res.json(response.data); // { access_token, refresh_token, ... }
+  } catch (err) {
+    console.error('❌ Token exchange failed:', err.response?.data || err.message);
+    res.status(500).send('Failed to exchange token');
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Auth server running at http://localhost:${PORT}`);
 });

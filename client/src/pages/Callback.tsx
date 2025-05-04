@@ -5,12 +5,12 @@ const Callback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get the 'code' parameter from the URL (the authorization code from Spotify)
+    // Get the authorization code from the URL query parameters
     const query = new URLSearchParams(window.location.search);
     const code = query.get('code');
-    
+    console.log('Received code:', code); // Log the received code for debugging
+
     if (code) {
-      // Send the code to the backend to exchange for an access token
       fetch('http://localhost:3001/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18,27 +18,23 @@ const Callback = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          // Check if token data is returned successfully
-          if (data.access_token && data.refresh_token) {
-            // Store the access token and refresh token in localStorage
-            localStorage.setItem('spotify_token', data.access_token);
-            localStorage.setItem('spotify_refresh_token', data.refresh_token);
-
-            // Redirect to profile page after successful login
-            navigate('/profile');
-          } else {
-            console.error('Token exchange failed: Missing access_token or refresh_token');
-          }
+          console.log('Received token data:', data); // Log the token data for debugging
+          
+          // Store the access token in localStorage
+          localStorage.setItem('spotify_token', data.access_token);
+          
+          // Redirect to the profile page after successful login
+          navigate('/profile'); // This redirects to the profile page
         })
         .catch((err) => {
           console.error('❌ Token exchange failed:', err);
         });
     } else {
-      console.error('No authorization code found in URL');
+      console.error('No code found in the URL');
     }
   }, [navigate]);
 
-  return <div>Logging you in...</div>;
+  return <p>Logging you in...</p>;
 };
 
 export default Callback;
