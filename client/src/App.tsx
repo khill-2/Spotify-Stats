@@ -2,31 +2,45 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const App = () => {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);  // To handle loading state
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if there's a token already stored in localStorage
     const token = localStorage.getItem('spotify_token');
-
+    const refreshToken = localStorage.getItem('spotify_refresh_token');
+  
     if (token) {
-      // If token exists, redirect to profile page (since the user is already logged in)
-      navigate('/profile');
+      fetch('https://api.spotify.com/v1/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => {
+          if (response.ok) {
+            navigate('/profile'); // Token is valid, proceed to profile
+          } else {
+            // Token is invalid or expired, proceed to login
+            localStorage.removeItem('spotify_token');
+            localStorage.removeItem('spotify_refresh_token');
+            navigate('/login');
+          }
+        })
+        .catch((err) => {
+          // Handle errors (e.g., network issues)
+          console.error('Error validating token:', err);
+          localStorage.removeItem('spotify_token');
+          localStorage.removeItem('spotify_refresh_token');
+          navigate('/login');
+        });
     } else {
-      setIsLoading(false); // Stop loading when no token is found
+      setIsLoading(false);
+      navigate('/login'); // No token found, go to login
     }
   }, [navigate]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show loading until we check for the token
+    return <div>Loading...</div>;
   }
 
-  return (
-    <div>
-      <h1>Welcome to WrappedNow</h1>
-      <p>If you're not logged in, you can <a href="/login">login here</a>.</p>
-    </div>
-  );
+  return <div>Redirecting...</div>; // You shouldn't reach here, as navigate should always occur
 };
 
 export default App;
