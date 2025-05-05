@@ -1,43 +1,60 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Callback = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    const code = query.get('code');
-  
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
     if (code) {
+      setIsLoading(true);
+
       fetch('http://127.0.0.1:3001/auth/token', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code }), // Send the code to the backend
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.access_token && data.refresh_token) {
-            // Save the access and refresh tokens in localStorage
             localStorage.setItem('spotify_token', data.access_token);
+            navigate('/profile');
             localStorage.setItem('spotify_refresh_token', data.refresh_token);
-  
-            navigate('/profile'); // Redirect to profile after successful login
+
+            // 🧼 Clean up the URL (remove ?code=...)
+            window.history.replaceState({}, document.title, '/profile');
+            navigate('/profile');
           } else {
-            console.error('❌ Token exchange failed: Missing access_token or refresh_token');
-            alert('Error during login. Please try again.');
+            console.warn('Token exchange failed — possibly reused or expired code.');
+            setIsLoading(false);
+            navigate('/login');
           }
         })
         .catch((err) => {
-          console.error('❌ Token exchange failed:', err);
-          alert('Error during login. Please try again.');
+          console.error('Error during login:', err);
+          setIsLoading(false);
+          navigate('/login');
         });
-    } else {
-      console.error('No authorization code found in URL');
-      alert('No authorization code found in URL');
     }
   }, [navigate]);
 
-  return <div>Logging you in...</div>;
+  return (
+    <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-xl">
+      {isLoading ? (
+        <>
+          <div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full mb-4" />
+          <p>Loading your Spotify stats...</p>
+        </>
+      ) : (
+        <p>Logging you in...</p>
+      )}
+    </div>
+  );
 };
 
 export default Callback;

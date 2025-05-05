@@ -1,29 +1,23 @@
-import { useState } from 'react';
-
-const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const RESPONSE_TYPE = 'code';
-const SCOPES = ['user-top-read', 'user-read-email', 'user-read-private'];
-
 const Login = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false);  // Track login state
+  const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // replace with your real client ID
+  const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
+  const SCOPES = [
+    'user-read-email',
+    'user-read-private',
+    'user-top-read',
+  ].join(' ');
 
-  const handleLoginClick = () => {
-    if (isLoggingIn) return;  // Prevent multiple clicks
-
-    setIsLoggingIn(true);  // Set the state to indicate login is in progress
-    const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join('%20')}`;
-
-    window.location.href = loginUrl;  // Redirect to Spotify login
-  };
+  const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${encodeURIComponent(SCOPES)}`;
 
   return (
-    <div>
-      <h1>Welcome to WrappedNow</h1>
-      <button onClick={handleLoginClick} disabled={isLoggingIn}>
-        {isLoggingIn ? 'Logging you in...' : 'Login with Spotify'}
-      </button>
+    <div className="text-white bg-black h-screen flex flex-col items-center justify-center">
+      <h1 className="text-3xl mb-4">Welcome to WrappedNow</h1>
+      <a
+        href={AUTH_URL}
+        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+      >
+        Login with Spotify
+      </a>
     </div>
   );
 };
