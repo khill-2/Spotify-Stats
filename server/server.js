@@ -1,11 +1,14 @@
+import { config } from 'dotenv';
+config(); // Load variables from .env
+
 import testRoutes from './testRoutes.js';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { config } from 'dotenv';
+// import { config } from 'dotenv';
 import fetch from 'node-fetch';
 
-config(); // Load .env variables
+// config(); // Load .env variables
 
 const app = express();
 const PORT = process.env.PORT || 3001;
