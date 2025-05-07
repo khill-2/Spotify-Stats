@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 
 app.post('/auth/token', async (req, res) => {
   const { code } = req.body;
-  const redirect_uri = 'http://127.0.0.1:3000/callback';
+  // const redirect_uri = 'http://127.0.0.1:3000/callback';
+  const redirect_uri = process.env.REDIRECT_URI;
 
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
     return res.status(500).json({ error: 'Client ID or Secret missing' });
@@ -176,5 +177,7 @@ app.get('/', (req, res) => {
 app.use('/api', testRoutes);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Auth server running at http://127.0.0.1:${PORT}`);
+  // console.log(`🚀 Auth server running at http://127.0.0.1:${PORT}`);
+  console.log(`🚀 Auth server running on port ${PORT}`);
+
 });

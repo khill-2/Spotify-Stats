@@ -1,6 +1,7 @@
 const Login = () => {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // replace with your real client ID
-  const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
+  // const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
   const SCOPES = [
     'user-read-email',
     'user-read-private',
