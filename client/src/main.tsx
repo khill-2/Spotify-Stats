@@ -6,6 +6,8 @@ import './index.css'; // Tailwind or global CSS
 import Login from './pages/Login';
 import Callback from './pages/Callback';
 import Profile from './pages/Profile';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+injectSpeedInsights();
 
 const Main = () => {
   return (
