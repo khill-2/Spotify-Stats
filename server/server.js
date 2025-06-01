@@ -59,7 +59,7 @@ app.post('/auth/token', async (req, res) => {
       const profile = await profileRes.json();
 
       if (!profile.id) {
-        console.error('❌ Failed to get Spotify profile:', profile);
+        console.error('Failed to get Spotify profile:', profile);
         return res.status(500).json({ error: 'Failed to fetch profile' });
       }
 
@@ -75,9 +75,9 @@ app.post('/auth/token', async (req, res) => {
       });
 
       if (userError) {
-        console.error('❌ Supabase insert error:', userError.message);
+        console.error('Supabase insert error:', userError.message);
       } else {
-        console.log('✅ User upserted into Supabase:', profile.display_name);
+        console.log('User upserted into Supabase:', profile.display_name);
       }
 
       // Step 3: Get top tracks
@@ -94,7 +94,7 @@ app.post('/auth/token', async (req, res) => {
         .single();
 
       if (findUserError || !userRows) {
-        console.error('❌ Could not find user in Supabase:', findUserError);
+        console.error('Could not find user in Supabase:', findUserError);
         return;
       }
 
@@ -120,9 +120,9 @@ app.post('/auth/token', async (req, res) => {
         });
 
         if (trackError) {
-          console.error(`❌ Error upserting track ${trackId}:`, trackError.message);
+          console.error(`Error upserting track ${trackId}:`, trackError.message);
         } else {
-          console.log(`✅ Upserted track: ${name} by ${artistName}`);
+          console.log(`Upserted track: ${name} by ${artistName}`);
         }
       }
 
@@ -150,9 +150,9 @@ app.post('/auth/token', async (req, res) => {
         });
 
         if (artistError) {
-          console.error(`❌ Error upserting artist ${name}:`, artistError.message);
+          console.error(`Error upserting artist ${name}:`, artistError.message);
         } else {
-          console.log(`✅ Upserted artist: ${name}`);
+          console.log(`Upserted artist: ${name}`);
         }
       }
 
@@ -177,7 +177,7 @@ app.get('/', (req, res) => {
 app.use('/api', testRoutes);
 
 app.listen(PORT, () => {
-  // console.log(`🚀 Auth server running at http://127.0.0.1:${PORT}`);
-  console.log(`🚀 Auth server running on port ${PORT}`);
+  // console.log(`Auth server running at http://127.0.0.1:${PORT}`);
+  console.log(`Auth server running on port ${PORT}`);
 
 });
