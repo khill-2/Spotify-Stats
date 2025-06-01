@@ -60,7 +60,7 @@ const Profile = () => {
 
       return { user, topTracks: tracks, topArtists: artists };
     } catch (err) {
-      console.error('❌ Error fetching from Supabase:', err);
+      console.error('Error fetching from Supabase:', err);
       return { user: { display_name: 'Unknown' }, topTracks: [], topArtists: [] };
     }
   };
