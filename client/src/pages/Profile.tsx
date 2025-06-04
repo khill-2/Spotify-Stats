@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './Profile.css';
 
 const SUPABASE_URL = 'https://cvigdtwvkcsmwglfugqr.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2aWdkdHd2a2NzbXdnbGZ1Z3FyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MTU3ODUsImV4cCI6MjA2MTk5MTc4NX0.JI6-Ui2fI2kzjRB9yIsWgUN_xTe0oyOQ3vwMtq4wHv8';
@@ -114,39 +115,43 @@ const Profile = () => {
   //   </div>
   // );
   return (
-    <div className="bg-black text-white min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-4">Welcome, {userData.display_name}</h1>
-      <div className="mb-6 text-gray-300">
-        <p><strong>Email:</strong> {userData.email}</p>
-        <p><strong>Country:</strong> {userData.country}</p>
-      </div>
-  
-      <h2 className="text-2xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-2">Top Tracks</h2>
-      {topTracks.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          {topTracks.map((track: any) => (
-            <div key={track.track_id} className="bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
-              <img src={track.image_url} alt={track.name} className="w-full h-48 object-cover rounded mb-3" />
-              <p className="text-lg font-semibold">{track.name}</p>
-              <p className="text-sm text-gray-400">{track.artist}</p>
-            </div>
-          ))}
-        </div>
-      ) : <p>No tracks found.</p>}
-  
-      <h2 className="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Top Artists</h2>
-      {topArtists.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {topArtists.map((artist: any) => (
-            <div key={artist.artist_id} className="bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
-              <img src={artist.image_url} alt={artist.name} className="w-full h-48 object-cover rounded mb-3" />
-              <p className="text-lg font-semibold">{artist.name}</p>
-              <p className="text-sm text-gray-400">Popularity: {artist.popularity}</p>
-            </div>
-          ))}
-        </div>
-      ) : <p>No artists found.</p>}
+    <div className="profile-container">
+    <h1 className="profile-header">Welcome, {userData.display_name}</h1>
+    <div className="profile-info">
+      <p><strong>Email:</strong> {userData.email}</p>
+      <p><strong>Country:</strong> {userData.country}</p>
     </div>
+
+    <h2 className="section-title">Top Tracks</h2>
+    {topTracks.length > 0 ? (
+      <div className="grid">
+        {topTracks.map((track: any) => (
+          <div key={track.track_id} className="card">
+            <img src={track.image_url} alt={track.name} />
+            <div className="card-content">
+              <p className="title">{track.name}</p>
+              <p className="subtitle">{track.artist}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : <p>No tracks found.</p>}
+
+    <h2 className="section-title">Top Artists</h2>
+    {topArtists.length > 0 ? (
+      <div className="grid">
+        {topArtists.map((artist: any) => (
+          <div key={artist.artist_id} className="card">
+            <img src={artist.image_url} alt={artist.name} />
+            <div className="card-content">
+              <p className="title">{artist.name}</p>
+              <p className="subtitle">Popularity: {artist.popularity}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : <p>No artists found.</p>}
+  </div>
   );
   
 };
