@@ -1,6 +1,4 @@
-/* Profile.css */
-/* updated file name */
-
+/* client/src/pages/Profile.css */
 .profile-container {
     background-color: #000;
     color: #fff;
@@ -53,10 +51,6 @@
   
   .card-content {
     padding: 0.75rem;
-  }
-  
-  .card-content p {
-    margin: 0.25rem 0;
   }
   
   .card-content .title {
