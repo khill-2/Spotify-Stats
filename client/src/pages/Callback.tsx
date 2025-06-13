@@ -28,7 +28,7 @@ const Callback = () => {
             navigate('/profile');
             localStorage.setItem('spotify_refresh_token', data.refresh_token);
 
-            // 🧼 Clean up the URL (remove ?code=...)
+            // clean url (remove ?code=...)
             window.history.replaceState({}, document.title, '/profile');
             navigate('/profile');
           } else {
