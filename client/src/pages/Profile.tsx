@@ -74,46 +74,6 @@ const Profile = () => {
       </div>
     );
   }
-
-  // return (
-  //   <div className="bg-black text-white p-8">
-  //     <h1 className="text-3xl font-bold mb-4">Welcome, {userData.display_name}</h1>
-  //     <p><strong>Email:</strong> {userData.email}</p>
-  //     <p><strong>Country:</strong> {userData.country}</p>
-
-  //     <h2 className="text-2xl font-semibold mt-8 mb-2">Top Tracks</h2>
-  //     {topTracks.length > 0 ? (
-  //       <ul className="space-y-3 mb-8">
-  //         {topTracks.map((track: any) => (
-  //           <li key={track.track_id} className="flex items-center space-x-4">
-  //             {/* <img src={track.image_url} alt={track.name} className="w-6 h-6 rounded" /> */}
-  //             <img src={track.image_url} alt={track.name} style={{ width: '120px', height: '120px', borderRadius: '4px' }} />
-  //             <div>
-  //               <p className="font-semibold">{track.name}</p>
-  //               <p className="text-sm text-gray-400">{track.artist}</p>
-  //             </div>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     ) : <p>No tracks found.</p>}
-
-  //     <h2 className="text-2xl font-semibold mb-2">Top Artists</h2>
-  //     {topArtists.length > 0 ? (
-  //       <ul className="space-y-3">
-  //         {topArtists.map((artist: any) => (
-  //           <li key={artist.artist_id} className="flex items-center space-x-4">
-  //             {/* <img src={artist.image_url} alt={artist.name} className="w-6 h-6 rounded" /> */}
-  //             <img src={artist.image_url} alt={artist.name} style={{ width: '120px', height: '120px', borderRadius: '4px' }} />
-  //             <div>
-  //               <p className="font-semibold">{artist.name}</p>
-  //               <p className="text-sm text-gray-400">Popularity: {artist.popularity}</p>
-  //             </div>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     ) : <p>No artists found.</p>}
-  //   </div>
-  // );
   return (
     <div className="profile-container">
     <h1 className="profile-header">Welcome, {userData.display_name}</h1>

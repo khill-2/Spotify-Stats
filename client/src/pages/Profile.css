@@ -1,64 +1,69 @@
 .profile-container {
-    background-color: #000;
-    color: #fff;
-    min-height: 100vh;
-    padding: 2rem;
-    font-family: sans-serif;
-  }
-  
-  .profile-header {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .profile-info {
-    margin-bottom: 2rem;
-    color: #ccc;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 0.5rem;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  
-  .card {
-    background-color: #111;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-  }
-  
-  .card:hover {
-    transform: scale(1.03);
-  }
-  
-  .card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    padding: 0.75rem;
-  }
-  
-  .card-content .title {
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  
-  .card-content .subtitle {
-    color: #888;
-    font-size: 0.9rem;
-  }
-  
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: sans-serif;
+
+  /*trying to fix fullscreen*/
+  width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.profile-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.profile-info {
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 0.75rem;
+}
+
+.card-content .title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card-content .subtitle {
+  color: #888;
+  font-size: 0.9rem;
+}
