@@ -12,7 +12,7 @@ const Login = () => {
 
   return (
     <div className="text-white bg-black h-screen flex flex-col items-center justify-center">
-      <h1 className="text-3xl mb-4">Welcome to WrappedNow</h1>
+      <h1 className="text-3xl mb-4">Welcome to Spotify Stats Dashboard</h1>
       <a
         href={AUTH_URL}
         className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
