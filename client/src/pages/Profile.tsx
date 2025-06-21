@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import './Profile.css';
 
-const SUPABASE_URL = 'https://cvigdtwvkcsmwglfugqr.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2aWdkdHd2a2NzbXdnbGZ1Z3FyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MTU3ODUsImV4cCI6MjA2MTk5MTc4NX0.JI6-Ui2fI2kzjRB9yIsWgUN_xTe0oyOQ3vwMtq4wHv8';
-// const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-// const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// const SUPABASE_URL = 'https://cvigdtwvkcsmwglfugqr.supabase.co';
+// const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2aWdkdHd2a2NzbXdnbGZ1Z3FyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0MTU3ODUsImV4cCI6MjA2MTk5MTc4NX0.JI6-Ui2fI2kzjRB9yIsWgUN_xTe0oyOQ3vwMtq4wHv8';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 
 const Profile = () => {
