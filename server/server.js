@@ -34,16 +34,25 @@ app.post('/auth/token', async (req, res) => {
   params.append('grant_type', 'authorization_code');
   params.append('code', code);
   params.append('redirect_uri', redirect_uri);
-  params.append('client_id', SPOTIFY_CLIENT_ID);
-  params.append('client_secret', SPOTIFY_CLIENT_SECRET);
+
+  // params.append('client_id', SPOTIFY_CLIENT_ID);
+  // params.append('client_secret', SPOTIFY_CLIENT_SECRET);
+  const authHeader = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
+
 
   try {
     const response = await fetch(tokenUrl, {
       method: 'POST',
       body: params,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      // headers: {
+      //   'Content-Type': 'application/x-www-form-urlencoded',
+      // },
+      method: 'POST',
+    body: params,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Basic ${authHeader}`,
+  },
     });
 
     const data = await response.json();
