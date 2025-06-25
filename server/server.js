@@ -42,7 +42,7 @@ app.post('/auth/token', async (req, res) => {
 
   params.append('client_id', SPOTIFY_CLIENT_ID);
   params.append('client_secret', SPOTIFY_CLIENT_SECRET);
-  // const authHeader = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
+  const authHeader = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
 
 
   try {
