@@ -21,9 +21,9 @@ app.use(bodyParser.json());
 
 app.post('/auth/token', async (req, res) => {
   const { code } = req.body;
-  console.log('SPOTIFY_CLIENT_ID:', process.env.SPOTIFY_CLIENT_ID);
-  console.log('SPOTIFY_CLIENT_SECRET:', process.env.SPOTIFY_CLIENT_SECRET);
-  console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
+  // console.log('SPOTIFY_CLIENT_ID:', process.env.SPOTIFY_CLIENT_ID);
+  // console.log('SPOTIFY_CLIENT_SECRET:', process.env.SPOTIFY_CLIENT_SECRET);
+  // console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
   // const redirect_uri = 'http://127.0.0.1:3000/callback';
   const redirect_uri = process.env.REDIRECT_URI;
 
@@ -61,7 +61,7 @@ app.post('/auth/token', async (req, res) => {
     });
 
     const data = await response.json();
-    console.log('Token exchange data from Spotify:', data);
+    // console.log('Token exchange data from Spotify:', data);
 
     if (data.access_token && data.refresh_token) {
       const access_token = data.access_token;
