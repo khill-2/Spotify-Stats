@@ -5,10 +5,7 @@ import testRoutes from './testRoutes.js';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import { config } from 'dotenv';
 import fetch from 'node-fetch';
-
-// config(); // Load .env variables
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,9 +18,6 @@ app.use(bodyParser.json());
 
 app.post('/auth/token', async (req, res) => {
   const { code } = req.body;
-  // console.log('SPOTIFY_CLIENT_ID:', process.env.SPOTIFY_CLIENT_ID);
-  // console.log('SPOTIFY_CLIENT_SECRET:', process.env.SPOTIFY_CLIENT_SECRET);
-  // console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
   // const redirect_uri = 'http://127.0.0.1:3000/callback';
   const redirect_uri = process.env.REDIRECT_URI;
 
@@ -49,9 +43,6 @@ app.post('/auth/token', async (req, res) => {
     const response = await fetch(tokenUrl, {
       method: 'POST',
       body: params,
-      // headers: {
-      //   'Content-Type': 'application/x-www-form-urlencoded',
-      // },
       method: 'POST',
       body: params,
       headers: {
