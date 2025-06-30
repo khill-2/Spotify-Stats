@@ -44,7 +44,7 @@ const Profile = () => {
       let user = users[0];
 
       if (!user) {
-        // Insert new user
+        // Insert new users
         const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/users`, {
           method: 'POST',
           headers: {
