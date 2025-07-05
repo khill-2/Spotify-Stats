@@ -38,7 +38,6 @@ app.post('/auth/token', async (req, res) => {
   params.append('client_secret', SPOTIFY_CLIENT_SECRET);
   const authHeader = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
 
-
   try {
     const response = await fetch(tokenUrl, {
       method: 'POST',
