@@ -140,6 +140,7 @@ const Profile = () => {
       }
     } catch (err) {
       console.error('Error fetching/syncing user:', err);
+      //empty user or DNE
       return { user: { display_name: 'Unknown' }, topTracks: [], topArtists: [] };
     }
   };
