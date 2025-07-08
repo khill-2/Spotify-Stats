@@ -31,9 +31,6 @@ app.post('/auth/token', async (req, res) => {
   params.append('grant_type', 'authorization_code');
   params.append('code', code);
   params.append('redirect_uri', redirect_uri);
-
-  // console.log('Using redirect_uri for token exchange:', redirect_uri);
-
   params.append('client_id', SPOTIFY_CLIENT_ID);
   params.append('client_secret', SPOTIFY_CLIENT_SECRET);
   const authHeader = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
