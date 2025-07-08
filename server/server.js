@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.post('/auth/token', async (req, res) => {
   const { code } = req.body;
-  // const redirect_uri = 'http://127.0.0.1:3000/callback';
+  //const redirect_uri = 'http://127.0.0.1:3000/callback';
   const redirect_uri = process.env.REDIRECT_URI;
 
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
