@@ -75,12 +75,6 @@ app.post('/auth/token', async (req, res) => {
         onConflict: 'spotify_id',
       });
 
-      // if (userError) {
-      //   console.error('Supabase insert error:', userError.message);
-      // } else {
-      //   console.log('User upserted into Supabase:', profile.display_name);
-      // }
-
       // Step 3: Get top tracks
       const topTracksRes = await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=20', {
         headers: { Authorization: `Bearer ${access_token}` },
