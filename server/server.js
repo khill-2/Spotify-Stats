@@ -172,6 +172,7 @@ app.get('/', (req, res) => {
 app.use('/api', testRoutes);
 
 app.listen(PORT, () => {
+  // Locally testing with console.log
   // console.log(`Auth server running at http://127.0.0.1:${PORT}`);
   console.log(`Auth server running on port ${PORT}`);
 
