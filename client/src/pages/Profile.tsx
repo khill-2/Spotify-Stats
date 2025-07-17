@@ -10,7 +10,6 @@ const Profile = () => {
   const [topArtists, setTopArtists] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect #1
   useEffect(() => {
     const token = localStorage.getItem('spotify_token');
     if (!token) return;
