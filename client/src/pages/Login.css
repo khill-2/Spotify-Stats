@@ -1,0 +1,42 @@
+/* Login.css */
+.login-container {
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.spotify-logo {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 120px;
+    /* Increase this from 40px */
+    height: auto;
+}
+
+.spotify-logo-centered {
+    width: 100px;
+    /* Size as you like */
+    height: auto;
+    margin-bottom: 20px;
+    /* Space between logo and heading */
+}
+
+
+.login-button {
+    background-color: #1db954;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.login-button:hover {
+    background-color: #1ed760;
+}
