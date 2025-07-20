@@ -49,7 +49,6 @@ app.post('/auth/token', async (req, res) => {
     });
 
     const data = await response.json();
-    // console.log('Token exchange data from Spotify:', data);
 
     if (data.access_token && data.refresh_token) {
       const access_token = data.access_token;
@@ -66,6 +65,7 @@ app.post('/auth/token', async (req, res) => {
       }
 
       // Step 2: Insert user into Supabase
+      // Upsert functionality - If exists, update; if not, insert
       const supabase = (await import('./supabaseClient.js')).default;
       const { error: userError } = await supabase.from('users').upsert({
         spotify_id: profile.id,
