@@ -47,13 +47,11 @@ const Callback = () => {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-xl">
+    <div className="loading-container">
       {isLoading ? (
         <>
-          <>
-            <div className="spinner" />
-            <p>Loading your Spotify stats...</p>
-          </>
+          <div className="spinner" />
+          <p>Loading your Spotify stats...</p>
         </>
       ) : (
         <p>Logging you in...</p>
