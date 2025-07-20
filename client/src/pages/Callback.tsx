@@ -1,6 +1,7 @@
 //correct logic for callback code authorization
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Loading.css';
 
 const Callback = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Callback = () => {
       setIsLoading(true);
 
       // fetch('http://127.0.0.1:3001/auth/token', {
-      fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/token`,{
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,8 +50,10 @@ const Callback = () => {
     <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-xl">
       {isLoading ? (
         <>
-          <div className="animate-spin h-8 w-8 border-4 border-white border-t-transparent rounded-full mb-4" />
-          <p>Loading your Spotify stats...</p>
+          <>
+            <div className="spinner" />
+            <p>Loading your Spotify stats...</p>
+          </>
         </>
       ) : (
         <p>Logging you in...</p>
