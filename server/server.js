@@ -26,6 +26,7 @@ app.post('/auth/token', async (req, res) => {
   }
 
   const tokenUrl = 'https://accounts.spotify.com/api/token';
+  // console.log('Exchanging code for token:', code);
 
   const params = new URLSearchParams();
   params.append('grant_type', 'authorization_code');
