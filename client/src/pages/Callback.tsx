@@ -13,7 +13,6 @@ const Callback = () => {
 
     if (code) {
       setIsLoading(true);
-
       // fetch('http://127.0.0.1:3001/auth/token', {
       fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/token`, {
         method: 'POST',
