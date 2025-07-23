@@ -20,7 +20,6 @@ const Login = () => {
         alt="Spotify Logo"
         className="spotify-logo-centered"
       />
-
       <h1>Welcome to Spotify Stats Dashboard</h1>
       <a href={AUTH_URL} className="login-button">
         Login with Spotify®
